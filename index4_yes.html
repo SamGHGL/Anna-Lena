@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ich freue mich so sehr ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #ffb3c6, #ff6b9d, #ff2d55);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      margin-top: 120px;
+      padding: 40px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      width: 80%;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #fff;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) translateX(0); opacity: 0.8; }
+      100% { transform: translateY(-120vh) translateX(40px); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="box">
+    <h1>Ich freue mich so sehr ❤️</h1>
+    <p id="text"></p>
+  </div>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (15 + Math.random() * 25) + "px";
+      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 12000);
+    }
+    setInterval(createHeart, 300);
+
+    function typeWriter(element, text, speed = 40) {
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    const message =
+      "Dass du Ja gesagt hast…\n" +
+      "Das bedeutet mir mehr, als ich in Worte fassen kann.\n\n" +
+      "Ich freue mich so sehr.\n" +
+      "Auf dich. Auf uns. Auf alles, was kommt. ❤️";
+
+    window.addEventListener("load", () => {
+      document.getElementById("box").style.opacity = 1;
+      setTimeout(() => {
+        typeWriter(document.getElementById("text"), message);
+      }, 500);
+    });
+  </script>
+
+</body>
+</html>
