@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>I love u ❤️</title>
+  <title>Für dich – Teil 2 ❤️</title>
 
   <style>
     body {
@@ -103,15 +103,18 @@
     }
     setInterval(createHeart, 300);
 
-    // Schreibmaschinen-Funktion
-    function typeWriter(element, text, speed = 40) {
+    // Schreibmaschinen-Funktion mit Callback
+    function typeWriter(element, text, speed = 40, callback = null) {
       element.style.opacity = 1;
       let i = 0;
+
       function typing() {
         if (i < text.length) {
           element.textContent += text.charAt(i);
           i++;
           setTimeout(typing, speed);
+        } else if (callback) {
+          callback();
         }
       }
       typing();
@@ -124,25 +127,8 @@
 
     // Start Animation
     window.addEventListener("load", () => {
-      document.getElementById("box").style.opacity = 1;
-
-      setTimeout(() => {
-        document.getElementById("title").style.opacity = 1;
-      }, 300);
-
-      setTimeout(() => {
-        typeWriter(document.getElementById("frage"), frageText);
-      }, 800);
-
-      setTimeout(() => {
-        typeWriter(document.getElementById("antwort"), antwortText);
-      }, 2000);
-
-      setTimeout(() => {
-        typeWriter(document.getElementById("antwort-explanation"), explanationText);
-      }, 3200);
-    });
-  </script>
-
-</body>
-</html>
+      const box = document.getElementById("box");
+      const title = document.getElementById("title");
+      const frage = document.getElementById("frage");
+      const antwort = document.getElementById("antwort");
+      const explanation = document.getElementById("antwort-ex
