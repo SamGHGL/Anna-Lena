@@ -70,13 +70,11 @@
       margin: 20px auto;
     }
 
-    /* Boxen standardmäßig unsichtbar */
     .glass-container {
       opacity: 0;
       transition: opacity 1s ease;
     }
 
-    /* Scroll-Pfeil */
     #arrow {
       position: fixed;
       bottom: 40px;
@@ -101,7 +99,6 @@
       50% { filter: drop-shadow(0 0 20px rgba(255, 45, 85, 0.8)); }
     }
 
-    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -142,6 +139,28 @@
       justify-content: center;
       padding: 20px;
     }
+
+    .next-button {
+      margin-top: 40px;
+      padding: 15px 40px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, #ff6b9d, #ff2d55);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 1s ease, transform 0.3s ease;
+      box-shadow: 0 8px 25px rgba(255, 45, 85, 0.4);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      letter-spacing: 1px;
+    }
+
+    .next-button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 35px rgba(255, 45, 85, 0.6);
+    }
   </style>
 </head>
 
@@ -154,26 +173,26 @@
     </div>
   </div>
 
-  <!-- Scroll-Pfeil -->
   <div id="arrow">⬇️</div>
 
-  <!-- Frage -->
   <div class="section">
     <div class="glass-container">
       <h3 id="frage"></h3>
     </div>
   </div>
 
-  <!-- Antwort -->
   <div class="section">
     <div class="glass-container">
       <h5 id="antwort"></h5>
       <div id="antwort-explanation" class="typewriter"></div>
+
+      <button id="nextButton" class="next-button" onclick="window.location.href='index2.html'">
+        Weiter ❤️
+      </button>
     </div>
   </div>
 
   <script>
-    // Floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -187,7 +206,6 @@
     }
     setInterval(createHeart, 300);
 
-    // Schreibmaschinen-Funktion
     function typeWriter(element, text, speed = 40) {
       element.style.opacity = 1;
       let i = 0;
@@ -201,7 +219,6 @@
       typing();
     }
 
-    // Intro-Text
     const introText =
       "Diese kleine Website habe ich nur für dich gemacht.\n" +
       "Weil du mir wichtig bist. Weil du mein Herz schneller schlagen lässt.\n" +
@@ -216,13 +233,11 @@
       }, 800);
     });
 
-    // Scroll-Pfeil ausblenden
     const arrow = document.getElementById("arrow");
     window.addEventListener("scroll", () => {
       arrow.style.opacity = window.scrollY > 50 ? "0" : "1";
     });
 
-    // Frage & Antwort beim Scrollen tippen
     let frageGetippt = false;
     let antwortGetippt = false;
 
@@ -230,7 +245,6 @@
       const scroll = window.scrollY;
       const height = window.innerHeight;
 
-      // Frage
       if (scroll > height * 0.4 && !frageGetippt) {
         frageGetippt = true;
         document.querySelectorAll(".glass-container")[1].style.opacity = 1;
@@ -240,7 +254,6 @@
         );
       }
 
-      // Antwort
       if (scroll > height * 1.4 && !antwortGetippt) {
         antwortGetippt = true;
         document.querySelectorAll(".glass-container")[2].style.opacity = 1;
@@ -255,6 +268,11 @@
             document.getElementById("antwort-explanation"),
             "Der Tag, an dem wir zusammengekommen sind"
           );
+
+          setTimeout(() => {
+            document.getElementById("nextButton").style.opacity = 1;
+          }, 2000);
+
         }, 800);
       }
     });
