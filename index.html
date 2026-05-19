@@ -1,46 +1,89 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meine erste GitHub‑Pages‑Website</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: system-ui, sans-serif;
-        background: linear-gradient(180deg, #000, #222);
-        color: white;
-        height: 200vh;
-      }
-      header {
-        position: sticky;
-        top: 0;
-        background: rgba(0, 0, 0, 0.7);
-        padding: 1rem;
-        text-align: center;
-        font-size: 1.5rem;
-      }
-      .hero {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        transform: translateZ(0);
-        will-change: transform;
-      }
-    </style>
-  </head>
-  <body>
-    <header>Willkommen auf meiner Seite</header>
-    <div class="hero" id="hero">Scroll mich!</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Für dich ❤️</title>
 
-    <script>
-      window.addEventListener("scroll", () => {
-        const scroll = window.scrollY;
-        const hero = document.getElementById("hero");
-        hero.style.transform = `translateY(${scroll * 0.3}px) rotateY(${scroll * 0.2}deg)`;
-      });
-    </script>
-  </body>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #ffdde1, #ee9ca7);
+      color: #4a0e23;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 80px;
+      font-size: 3rem;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.4rem;
+      width: 80%;
+      margin: 20px auto;
+      line-height: 1.6;
+      animation: fadeIn 3s ease forwards;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      color: #ff2d55;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) translateX(0); opacity: 0.8; }
+      100% { transform: translateY(-120vh) translateX(40px); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Für dich ❤️</h1>
+  <p>
+    Diese kleine Website habe ich nur für dich gemacht.<br>
+    Weil du mir wichtig bist. Weil du mein Herz schneller schlagen lässt.<br>
+    Und weil ich dir zeigen wollte, wie viel du mir bedeutest.
+  </p>
+
+  <p>
+    Ich hoffe, dass du lächelst, wenn du das liest.<br>
+    Denn genau das wollte ich erreichen.
+  </p>
+
+  <script>
+    // Create floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (20 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
 </html>
