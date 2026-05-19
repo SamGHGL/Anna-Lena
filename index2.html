@@ -13,6 +13,7 @@
       color: white;
       text-align: center;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
     .container {
@@ -30,16 +31,34 @@
       transition: opacity 1.5s ease;
     }
 
+    h1, h3, h5 {
+      text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
     h1 {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      text-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
-    p {
+    h3 {
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+
+    h5 {
+      font-size: 1.6rem;
+      margin-top: 20px;
+    }
+
+    .typewriter {
       font-size: 1.4rem;
       line-height: 1.7;
       white-space: pre-wrap;
+      opacity: 0;
+      transition: opacity 1s ease;
+      margin-top: 20px;
     }
 
     .heart {
@@ -61,11 +80,17 @@
 <body>
 
   <div class="container" id="box">
-    <h1>Weißt du was? ❤️</h1>
-    <p id="text"></p>
+    <h1 id="title">Teil 2 ❤️</h1>
+
+    <h3 id="frage"></h3>
+
+    <h5 id="antwort"></h5>
+
+    <div id="antwort-explanation" class="typewriter"></div>
   </div>
 
   <script>
+    // Floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -78,7 +103,9 @@
     }
     setInterval(createHeart, 300);
 
+    // Schreibmaschinen-Funktion
     function typeWriter(element, text, speed = 40) {
+      element.style.opacity = 1;
       let i = 0;
       function typing() {
         if (i < text.length) {
@@ -90,17 +117,30 @@
       typing();
     }
 
-    const message =
-      "Ich bin so dankbar für dich.\n" +
-      "Für jeden Moment, jedes Lächeln, jede Nachricht.\n\n" +
-      "Du machst mein Leben schöner.\n" +
-      "Und ich freue mich auf alles, was noch kommt. ❤️";
+    // Texte
+    const frageText = "🗣️: Würdest du nochmal mit ihr zusammen sein?";
+    const antwortText = "Ja, jederzeit ❤️";
+    const explanationText = "Weil sie das Beste ist, was dir passieren konnte.";
 
+    // Start Animation
     window.addEventListener("load", () => {
       document.getElementById("box").style.opacity = 1;
+
       setTimeout(() => {
-        typeWriter(document.getElementById("text"), message);
-      }, 500);
+        document.getElementById("title").style.opacity = 1;
+      }, 300);
+
+      setTimeout(() => {
+        typeWriter(document.getElementById("frage"), frageText);
+      }, 800);
+
+      setTimeout(() => {
+        typeWriter(document.getElementById("antwort"), antwortText);
+      }, 2000);
+
+      setTimeout(() => {
+        typeWriter(document.getElementById("antwort-explanation"), explanationText);
+      }, 3200);
     });
   </script>
 
