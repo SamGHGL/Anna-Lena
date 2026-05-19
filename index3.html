@@ -62,11 +62,17 @@
       100% { transform: translateY(-120vh) translateX(40px); opacity: 0; }
     }
 
-    /* Buttons */
+    /* Animierte Buttons */
     #decisionButtons {
       opacity: 0;
-      transition: opacity 1s ease;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
       margin-top: 40px;
+    }
+
+    #decisionButtons.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .choice-button {
@@ -99,7 +105,6 @@
 
     <ul id="list"></ul>
 
-    <!-- JA / NEIN Buttons -->
     <div id="decisionButtons">
       <button class="choice-button" onclick="alert('Das macht mich glücklich ❤️')">Ja ❤️</button>
       <button class="choice-button" onclick="alert('Das tut weh 😢')">Nein 💔</button>
@@ -107,7 +112,6 @@
   </div>
 
   <script>
-    // Floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -120,7 +124,6 @@
     }
     setInterval(createHeart, 300);
 
-    // Gründe-Liste
     const reasons = [
       "Weil du mich zum Lächeln bringst.",
       "Weil du mein Herz wärmer machst.",
@@ -183,20 +186,8 @@
       "Weil du mich nie fallen lässt.",
       "Weil du mich nie im Regen stehen lässt.",
       "Weil du mich nie ignorierst.",
-      "Weil du mich nie vergisst.",
-      "Weil du mich nie ersetzt.",
-      "Weil du mich nie aufgibst.",
       "Weil ich dich liebe."
     ];
-
-  </script>   <!-- JA / NEIN Buttons -->
-    <div id="decisionButtons">
-      <button class="choice-button" onclick="alert('Das macht mich glücklich ❤️')">Ja ❤️</button>
-      <button class="choice-button" onclick="alert('Das tut weh 😢')">Nein 💔</button>
-    </div>
-  </div>
-
-  <script>
 
     window.addEventListener("load", () => {
       document.getElementById("box").style.opacity = 1;
@@ -213,8 +204,7 @@
           i++;
           setTimeout(addReason, 200);
         } else {
-          // Buttons einblenden
-          buttons.style.opacity = 1;
+          buttons.classList.add("show");
         }
       }
 
