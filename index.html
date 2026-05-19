@@ -22,6 +22,25 @@
       transition: opacity 1s ease;
     }
 
+    h3, h4, h5 {
+      text-align: center;
+      margin: 40px auto;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+    }
+
+    h4 {
+      font-size: 1.6rem;
+    }
+
+    h5 {
+      font-size: 1.4rem;
+    }
+
     .typewriter {
       width: 80%;
       margin: 40px auto;
@@ -73,6 +92,12 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      flex-direction: column;
+    }
+
+    .answer-explanation {
+      margin-top: 20px;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -88,12 +113,13 @@
 
   <!-- Frage -->
   <div class="section">
-    <div id="frage" class="typewriter"></div>
+    <h3 id="frage"></h3>
   </div>
 
   <!-- Antwort -->
   <div class="section">
-    <div id="antwort" class="typewriter"></div>
+    <h5 id="antwort"></h5>
+    <div id="antwort-explanation" class="typewriter answer-explanation"></div>
   </div>
 
   <script>
@@ -163,8 +189,14 @@
         antwortGetippt = true;
         typeWriter(
           document.getElementById("antwort"),
-          "Sonntag, 1. Mai – der Tag, an dem wir zusammengekommen sind ❤️"
+          "Sonntag, 1. Mai ❤️"
         );
+        setTimeout(() => {
+          typeWriter(
+            document.getElementById("antwort-explanation"),
+            "Der Tag, an dem wir zusammengekommen sind"
+          );
+        }, 800);
       }
     });
   </script>
