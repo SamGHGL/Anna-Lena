@@ -151,7 +151,7 @@
       const scroll = window.scrollY;
       const height = window.innerHeight;
 
-      if (scroll > height * 0.6 && !frageGetippt) {
+      if (scroll > height * 0.8 && !frageGetippt) {
         frageGetippt = true;
         typeWriter(
           document.getElementById("frage"),
@@ -159,7 +159,7 @@
         );
       }
 
-      if (scroll > height * 1.4 && !antwortGetippt) {
+      if (scroll > height * 1.8 && !antwortGetippt) {
         antwortGetippt = true;
         typeWriter(
           document.getElementById("antwort"),
