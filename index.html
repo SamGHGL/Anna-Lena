@@ -22,12 +22,12 @@
 
     h1 {
       text-align: center;
-      margin-top: 80px;
       font-size: 3rem;
       opacity: 0;
       transition: opacity 1s ease;
       text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       letter-spacing: 2px;
+      margin: 0;
     }
 
     h3, h4, h5 {
@@ -157,6 +157,15 @@
       max-width: 600px;
     }
 
+    /* Erste Box - zentriert */
+    .intro-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
     /* Glasmorphism Container */
     .glass-container {
       background: rgba(255, 255, 255, 0.1);
@@ -179,9 +188,11 @@
 
 <body>
 
-  <div class="glass-container" style="margin-top: 60px;">
-    <h1 id="title">Für dich ❤️</h1>
-    <div id="text1" class="typewriter"></div>
+  <div class="intro-section">
+    <div class="glass-container">
+      <h1 id="title">Für dich ❤️</h1>
+      <div id="text1" class="typewriter"></div>
+    </div>
   </div>
 
   <!-- Scroll-Pfeil -->
