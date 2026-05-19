@@ -113,8 +113,8 @@
           element.textContent += text.charAt(i);
           i++;
           setTimeout(typing, speed);
-        } else if (callback) {
-          callback();
+        } else {
+          if (callback) callback();
         }
       }
       typing();
@@ -131,4 +131,31 @@
       const title = document.getElementById("title");
       const frage = document.getElementById("frage");
       const antwort = document.getElementById("antwort");
-      const explanation = document.getElementById("antwort-ex
+      const explanation = document.getElementById("antwort-explanation");
+
+      // Box einblenden
+      box.style.opacity = 1;
+
+      // 1. Titel einblenden
+      setTimeout(() => {
+        title.style.opacity = 1;
+
+        // 2. Frage tippen
+        typeWriter(frage, frageText, 40, () => {
+
+          // 3. Antwort tippen (erst wenn Frage fertig)
+          typeWriter(antwort, antwortText, 40, () => {
+
+            // 4. Erklärung tippen (erst wenn Antwort fertig)
+            typeWriter(explanation, explanationText, 40);
+
+          });
+
+        });
+
+      }, 300);
+    });
+  </script>
+
+</body>
+</html>
