@@ -14,20 +14,24 @@
       overflow-x: hidden;
     }
 
+    .typewriter {
+      width: 80%;
+      margin: 40px auto;
+      font-size: 1.4rem;
+      text-align: center;
+      line-height: 1.6;
+      min-height: 120px;
+      opacity: 0;
+      transition: opacity 1s ease;
+      white-space: pre-wrap;
+    }
+
     h1 {
       text-align: center;
       margin-top: 80px;
       font-size: 3rem;
-      animation: fadeIn 2s ease forwards;
-    }
-
-    p {
-      text-align: center;
-      font-size: 1.4rem;
-      width: 80%;
-      margin: 20px auto;
-      line-height: 1.6;
-      animation: fadeIn 3s ease forwards;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
     /* Scroll-Pfeil */
@@ -63,21 +67,11 @@
       100% { transform: translateY(-120vh) translateX(40px); opacity: 0; }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Frage & Antwort */
     .section {
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      opacity: 0;
-      transition: opacity 1.5s ease;
-      text-align: center;
       padding: 20px;
     }
   </style>
@@ -85,25 +79,21 @@
 
 <body>
 
-  <h1>Für dich ❤️</h1>
-  <p>
-    Diese kleine Website habe ich nur für dich gemacht.<br>
-    Weil du mir wichtig bist. Weil du mein Herz schneller schlagen lässt.<br>
-    Und weil ich dir zeigen wollte, wie viel du mir bedeutest.
-  </p>
+  <h1 id="title">Für dich ❤️</h1>
+
+  <div id="text1" class="typewriter"></div>
 
   <!-- Scroll-Pfeil -->
   <div id="arrow">⬇️</div>
 
   <!-- Frage -->
-  <div id="frage" class="section">
-    Was war der schönste Tag deines Lebens?
+  <div class="section">
+    <div id="frage" class="typewriter"></div>
   </div>
 
   <!-- Antwort -->
-  <div id="antwort" class="section">
-    <h4>Sonntag, 1. Mai</h4>
-    <p>– der Tag, an dem wir zusammengekommen sind ❤️</p>
+  <div class="section">
+    <div id="antwort" class="typewriter"></div>
   </div>
 
   <script>
@@ -116,10 +106,36 @@
       heart.style.fontSize = (20 + Math.random() * 20) + "px";
       heart.style.animationDuration = (4 + Math.random() * 4) + "s";
       document.body.appendChild(heart);
-
       setTimeout(() => heart.remove(), 8000);
     }
     setInterval(createHeart, 400);
+
+    // Schreibmaschinen-Funktion
+    function typeWriter(element, text, speed = 40) {
+      element.style.opacity = 1;
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    // Intro-Text
+    const introText =
+      "Diese kleine Website habe ich nur für dich gemacht.\n" +
+      "Weil du mir wichtig bist. Weil du mein Herz schneller schlagen lässt.\n" +
+      "Und weil ich dir zeigen wollte, wie viel du mir bedeutest.";
+
+    window.addEventListener("load", () => {
+      document.getElementById("title").style.opacity = 1;
+      setTimeout(() => {
+        typeWriter(document.getElementById("text1"), introText);
+      }, 800);
+    });
 
     // Scroll-Pfeil ausblenden
     const arrow = document.getElementById("arrow");
@@ -127,16 +143,29 @@
       arrow.style.opacity = window.scrollY > 50 ? "0" : "1";
     });
 
-    // Frage & Antwort einblenden
-    const frage = document.getElementById("frage");
-    const antwort = document.getElementById("antwort");
+    // Frage & Antwort beim Scrollen tippen
+    let frageGetippt = false;
+    let antwortGetippt = false;
 
     window.addEventListener("scroll", () => {
       const scroll = window.scrollY;
       const height = window.innerHeight;
 
-      if (scroll > height * 0.5) frage.style.opacity = 1;
-      if (scroll > height * 1.5) antwort.style.opacity = 1;
+      if (scroll > height * 0.5 && !frageGetippt) {
+        frageGetippt = true;
+        typeWriter(
+          document.getElementById("frage"),
+          "Was war der schönste Tag deines Lebens?"
+        );
+      }
+
+      if (scroll > height * 1.5 && !antwortGetippt) {
+        antwortGetippt = true;
+        typeWriter(
+          document.getElementById("antwort"),
+          "Sonntag, 1. Mai – der Tag, an dem wir zusammengekommen sind ❤️"
+        );
+      }
     });
   </script>
 
