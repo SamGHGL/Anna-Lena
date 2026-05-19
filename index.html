@@ -14,6 +14,14 @@
       overflow-x: hidden;
     }
 
+    h1 {
+      text-align: center;
+      margin-top: 80px;
+      font-size: 3rem;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
     .typewriter {
       width: 80%;
       margin: 40px auto;
@@ -22,15 +30,7 @@
       line-height: 1.6;
       min-height: 120px;
       opacity: 0;
-      transition: opacity 1s ease;
       white-space: pre-wrap;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 80px;
-      font-size: 3rem;
-      opacity: 0;
       transition: opacity 1s ease;
     }
 
@@ -151,7 +151,7 @@
       const scroll = window.scrollY;
       const height = window.innerHeight;
 
-      if (scroll > height * 0.5 && !frageGetippt) {
+      if (scroll > height * 0.6 && !frageGetippt) {
         frageGetippt = true;
         typeWriter(
           document.getElementById("frage"),
@@ -159,7 +159,7 @@
         );
       }
 
-      if (scroll > height * 1.5 && !antwortGetippt) {
+      if (scroll > height * 1.4 && !antwortGetippt) {
         antwortGetippt = true;
         typeWriter(
           document.getElementById("antwort"),
