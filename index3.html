@@ -36,6 +36,21 @@
       text-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
+    h4 {
+      font-size: 1.4rem;
+      margin: 20px 0;
+      font-style: italic;
+      color: #ff2d55;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    h4.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     ul {
       text-align: left;
       font-size: 1.4rem;
@@ -104,6 +119,8 @@
     <h1>Warum ich dich liebe ❤️</h1>
 
     <ul id="list"></ul>
+
+    <h4 id="andDu">und du?</h4>
 
     <div id="decisionButtons">
   <button class="choice-button" onclick="window.location.href='index4_yes.html'">Ja ❤️</button>
@@ -196,6 +213,7 @@
 
       const list = document.getElementById("list");
       const buttons = document.getElementById("decisionButtons");
+      const andDu = document.getElementById("andDu");
 
       let i = 0;
       function addReason() {
@@ -206,7 +224,10 @@
           i++;
           setTimeout(addReason, 200);
         } else {
-          buttons.classList.add("show");
+          andDu.classList.add("show");
+          setTimeout(() => {
+            buttons.classList.add("show");
+          }, 500);
         }
       }
 
